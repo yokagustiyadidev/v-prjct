@@ -71,32 +71,38 @@
 
     body{
       font-family:var(--sans);
-      /* satu background halaman: bintang liquid glass di atas gradasi blurple.
-         Gambar bintangnya TERANG (kaca pucat, rata-rata RGB ~229,239,247 — dicek
-         11 Nov), jadi gradasi di atasnya yang memberi warna. Dua perbaikan v7
-         supaya gradasi benar-benar KELIHATAN, bukan biru datar:
-         1) lapisan gradasi diberi `fixed` + ukuran 100% 100vh — sebelumnya
-            attachment-nya default `scroll`, sehingga gradasi 0–100% meregang
-            sepanjang dokumen (±6000px) dan dalam satu layar hanya tampak
-            sepotong kecil yang nyaris rata; sekarang satu gradasi penuh selalu
-            mengisi viewport di layar mana pun.
-         2) rentang stop dilebarkan dan opacity sedikit diturunkan di stop
-            tergelap supaya tekstur bintang pucat ikut menerobos. Di mobile
-            (<=860px) attachment jadi scroll, tapi ukuran 100vh membuat
-            gradasi mengulang tiap satu layar, jadi tetap terlihat, bukan datar.
-         v9: DIGELAPKAN mengikuti swatch kiriman yoka — dasar #18123A (navy
-         sangat gelap, RGB 24,18,58; variasi sample #19133A/#18133B). Stop
-         gradasi tetap keluarga blurple/navy gelap: #2A2A6B -> #1E1B4B ->
-         #18123A -> #23235A -> #18123A. Fallback juga #18123A. */
-      background:
-        linear-gradient(180deg,rgba(42,42,107,.96) 0%,rgba(30,27,75,.95) 28%,rgba(24,18,58,.94) 52%,rgba(35,35,90,.95) 78%,rgba(24,18,58,.96) 100%) center top/100% 100vh fixed,
-        url("assets/bg-stars-glass.webp") center top/cover no-repeat fixed #18123A;
+      background:#18123A;
       color:#fff;
       font-size:1rem;
       line-height:1.65;
       -webkit-font-smoothing:antialiased;
       text-rendering:optimizeLegibility;
       overflow-x:hidden;
+    }
+
+    /* ---------- satu lapisan latar halaman, menempel di viewport ----------
+       v10: latar dipindah dari `background` body ke pseudo-element `fixed`.
+       Dua bug mobile yang diperbaiki:
+       1) `background-attachment:scroll` di <=860px membuat gradasi
+          `100% 100vh` MENGULANG tiap satu layar — muncul garis sambung
+          horizontal tiap ±844px (terlihat jelas di screenshot mobile).
+       2) dengan attachment scroll, `cover` dihitung terhadap TINGGI DOKUMEN
+          (±13.000px), jadi tekstur bintang ter-zoom ekstrem (satu gelembung
+          jadi blob raksasa & buram), bukan bintang halus.
+       Sekarang gradasi + tekstur digambar sekali per viewport (fixed layer),
+       hasilnya sama persis dengan tampilan desktop `fixed` sebelumnya.
+       Mobile memakai gradasi bersih tanpa foto bintang: titik bintang tajam
+       sudah disediakan komponen `.stars` (JS) di tiap section. */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      background:
+        radial-gradient(120% 85% at 82% -12%,rgba(88,101,242,.30) 0%,rgba(88,101,242,0) 62%),
+        linear-gradient(180deg,rgba(42,42,107,.93) 0%,rgba(30,27,75,.92) 28%,rgba(24,18,58,.92) 52%,rgba(35,35,90,.92) 78%,rgba(24,18,58,.95) 100%),
+        url("assets/bg-stars-glass.webp") center top/cover no-repeat #18123A;
     }
 
     img{max-width:100%;display:block}
@@ -540,18 +546,60 @@
       .foot-top{grid-template-columns:1fr 1fr}
       .steps{grid-template-columns:1fr}
     }
-    @media (max-width:980px){
+    @media (max-width:1279px){
+      /* Tiga kartu baru muat tanpa label bertabrakan di desktop lebar. */
       .pricing{grid-template-columns:1fr}
     }
     @media (max-width:860px){
-      body{background-attachment:scroll}
+      /* latar mobile: gradasi bersih satu layar (tanpa tekstur foto yang
+         ter-zoom ekstrem) + glow blurple tipis supaya tidak datar */
+      body::before{
+        background:
+          radial-gradient(95% 60% at 90% -8%,rgba(110,122,255,.26) 0%,rgba(110,122,255,0) 60%),
+          radial-gradient(80% 45% at 0% 14%,rgba(72,84,230,.14) 0%,rgba(72,84,230,0) 62%),
+          linear-gradient(180deg,#251C55 0%,#1C1645 30%,#18123A 56%,#1B1543 80%,#18123A 100%);
+      }
       .nav-list{display:none}
       .head-cta .btn{display:none}
       .nav-toggle{display:block}
-      /* hero mobile: gambar tetap jadi background, digeser ke kanan supaya karakter kebawa; gradasi lebih pekat supaya teks terbaca */
-      .hero::before{background:linear-gradient(90deg,rgba(30,31,34,.90) 0%,rgba(30,31,34,.62) 55%,rgba(30,31,34,.30) 100%),url("assets/hero-space.jpg") 70% center/cover no-repeat #1E1F22}
-      .hero-content-wrap{position:static}
+      section[id]{scroll-margin-top:76px}
+      /* header mobile: kaca navy lebih pekat supaya brand tetap terbaca di
+         atas konten apa pun */
+      .site-head{
+        background:rgba(24,18,58,.66);
+        -webkit-backdrop-filter:blur(16px) saturate(1.2);
+        backdrop-filter:blur(16px) saturate(1.2);
+        border-bottom:1px solid rgba(255,255,255,.10);
+      }
+      .mobile-panel{
+        top:64px;
+        background:rgba(24,18,58,.97);
+        -webkit-backdrop-filter:blur(20px);
+        backdrop-filter:blur(20px);
+        border-bottom:1px solid rgba(255,255,255,.12);
+        border-radius:0 0 20px 20px;
+        box-shadow:0 30px 50px -24px rgba(0,0,0,.7);
+        max-height:calc(100dvh - 64px);
+        overflow-y:auto;
+        padding-bottom:calc(2rem + env(safe-area-inset-bottom));
+      }
+      /* hero mobile v10: teks di atas latar bersih (bukan foto ter-zoom),
+         artwork hero jadi "band" di bawah teks lalu larut ke latar halaman */
+      .hero{padding-top:80px;padding-bottom:0;background:transparent}
+      .hero::before{display:none}
+      .hero::after{
+        content:"";
+        position:relative;z-index:1;display:block;
+        width:100%;height:clamp(160px,46vw,200px);
+        margin-top:1.25rem;
+        background:url("assets/hero-space.jpg") 50% 58%/cover no-repeat;
+        -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 22%,#000 82%,transparent 100%);
+        mask-image:linear-gradient(180deg,transparent 0%,#000 22%,#000 82%,transparent 100%);
+      }
+      .hero-content-wrap{position:relative;z-index:2}
       .hero-content{max-width:100%}
+      .hero h1{font-size:clamp(2.4rem,5.8vw,3.2rem)}
+      .hero-note{margin-top:-.5rem;margin-bottom:1.5rem}
       .modules{grid-template-columns:repeat(2,1fr)}
       .module{grid-column:span 1}
       .module--wide{grid-column:span 2}
@@ -564,12 +612,49 @@
       .services{grid-template-columns:1fr}
       .svc:nth-child(even){margin-top:0}
       .svc{margin-top:0}
-      .hero-actions{flex-direction:column;align-items:stretch}
+      /* Label masuk alur kartu agar tidak menimpa judul pada layar kecil. */
+      .module-tag,.plan-flag{position:static;align-self:flex-start;margin-bottom:1rem}
+      .pricing,.pricing--duo{grid-template-columns:minmax(0,1fr)}
+      .plan{min-width:0}
+      .plan-feats-toggle summary{font-size:clamp(.6rem,2.8vw,.72rem);gap:.35rem;padding-inline:.4rem;letter-spacing:.02em}
+      .plan-feats-toggle summary i{flex:0 0 auto}
+      /* hero: tipe lebih kalem + wrap alami supaya tidak jadi 6 baris raksasa */
+      .hero h1{font-size:clamp(2.05rem,8.6vw,2.75rem);line-height:.98;letter-spacing:-.015em}
+      .hero h1 br{display:none}
+      .hero-eyebrow{gap:.5rem;margin-bottom:1.05rem}
+      .hero-eyebrow .label{font-size:.64rem;letter-spacing:.1em;gap:.45rem}
+      .hero-eyebrow .label--mark::before{width:7px;height:7px;border-radius:2px}
+      .hero-eyebrow .tag{font-size:.58rem;padding:.28rem .55rem;letter-spacing:.1em}
+      .hero .lede{font-size:.95rem;line-height:1.6;margin-bottom:1.5rem}
+      .hero-actions{flex-direction:column;align-items:stretch;gap:.6rem;margin-bottom:1.25rem}
       .hero-actions .btn{width:100%}
+      .hero-note{font-size:.64rem;line-height:1.55;letter-spacing:.06em;margin:-.15rem 0 1.25rem}
+      .hero::after{height:clamp(150px,44vw,190px);margin-top:1rem}
+      /* CTA: teks di kartu bersih, karakter jadi band di bawah — crop landscape
+         tidak lagi dipaksa memenuhi kartu portrait dan menabrak teks */
+      .cta-inner{
+        background:linear-gradient(180deg,#2A2350 0%,#241C4C 55%,#1E1844 100%);
+        padding:2.25rem 1.25rem calc(178px + 1.5rem);
+        border-radius:26px;
+      }
+      .cta-inner::after{
+        content:"";position:absolute;left:0;right:0;bottom:0;height:190px;z-index:0;pointer-events:none;
+        background:url("assets/cta-characters.jpg") 50% 62%/cover no-repeat;
+        -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 26%,#000 100%);
+        mask-image:linear-gradient(180deg,transparent 0%,#000 26%,#000 100%);
+      }
+      .cta h2{font-size:clamp(1.95rem,7.4vw,2.5rem)}
+      .cta .lede{font-size:.95rem;line-height:1.6}
       .foot-top{grid-template-columns:1fr}
       .foot-bottom{flex-direction:column;align-items:flex-start;gap:.75rem}
       .faq-item .ans{padding-right:1.4rem}
-      .wa-float{right:.9rem;bottom:.9rem;padding:.75rem 1rem}
+      /* WhatsApp: ikon bulat ringkas supaya tidak menutupi isi kartu */
+      .wa-float{
+        width:52px;height:52px;padding:0;gap:0;font-size:0;justify-content:center;
+        right:calc(.85rem + env(safe-area-inset-right));
+        bottom:calc(.85rem + env(safe-area-inset-bottom));
+      }
+      .wa-float i{font-size:1.5rem}
     }
   </style>
 </head>
@@ -626,7 +711,7 @@
             <span class="tag">Est. 2026</span>
           </div>
           <h1 class="display">
-            Solusi digital satu atap untuk<br>sekolah, bisnis, dan acara.
+            Solusi digital satu atap untuk<br> sekolah, bisnis, dan acara.
           </h1>
           <p class="lede">
             Satu dashboard untuk absensi, nilai, CBT, dan rapor. Satu website yang membuat calon klien percaya.
