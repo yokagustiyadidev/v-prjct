@@ -11,7 +11,7 @@
   <meta property="og:description" content="Dashboard sekolah, website bisnis, undangan nikah, sampai portofolio.">
   <meta property="og:image" content="assets/web.webp">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="assets/logo-globe-transparent.png">
+  <link rel="icon" href="assets/logo-globe-transparent.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -261,7 +261,7 @@
     .mobile-panel a{display:block;padding:.9rem 0;font-family:var(--sans);font-size:.85rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#DBDEE1;border-bottom:1px solid var(--line-dark)}
     .mobile-panel .btn{margin-top:1.25rem;width:100%;color:var(--on-brand);background:var(--brand);border:1px solid transparent;border-bottom:1px solid transparent;text-align:center;justify-content:center}
 
-    /* ---------- hero: overlay full-bleed ala v4 — hero-space.jpg jadi background di belakang teks ---------- */
+    /* ---------- hero: overlay full-bleed ala v4 — hero-space.webp jadi background di belakang teks ---------- */
     .hero{
       position:relative;
       padding-top:clamp(5rem,10vh,7rem);
@@ -283,7 +283,7 @@
       position:absolute;inset:0;z-index:0;pointer-events:none;
       background:
         linear-gradient(90deg,rgba(30,31,34,.88) 0%,rgba(30,31,34,.55) 38%,rgba(30,31,34,.12) 62%,rgba(30,31,34,0) 82%),
-        url("assets/hero-space.jpg") 50% center/cover no-repeat #1E1F22;
+        url("assets/hero-space.webp") 50% center/cover no-repeat #1E1F22;
       -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 52%,transparent 96%);
       mask-image:linear-gradient(180deg,#000 0%,#000 52%,transparent 96%);
     }
@@ -487,7 +487,7 @@
     /* ---------- cta: gambar karakter jadi background card, teks CENTER di atas overlay gelap halus ---------- */
     .cta{position:relative;overflow:hidden}
     .cta .wrap{position:relative;z-index:1}
-    .cta-inner{position:relative;display:block;text-align:center;overflow:hidden;background:linear-gradient(180deg,rgba(24,18,54,.58) 0%,rgba(24,18,54,.48) 45%,rgba(24,18,54,.62) 100%),url("assets/cta-characters.jpg") center 68%/cover no-repeat #2A2350;border:1px solid rgba(255,255,255,.22);border-radius:32px;padding:clamp(2.5rem,5vw,3.75rem) clamp(1.5rem,4vw,3rem)}
+    .cta-inner{position:relative;display:block;text-align:center;overflow:hidden;background:linear-gradient(180deg,rgba(24,18,54,.58) 0%,rgba(24,18,54,.48) 45%,rgba(24,18,54,.62) 100%),url("assets/cta-characters.webp") center 68%/cover no-repeat #2A2350;border:1px solid rgba(255,255,255,.22);border-radius:32px;padding:clamp(2.5rem,5vw,3.75rem) clamp(1.5rem,4vw,3rem)}
     .cta-inner>div{position:relative;z-index:1}
     .cta h2{font-size:clamp(2.4rem,5.6vw,4.2rem);margin-bottom:1.25rem;text-shadow:0 2px 16px rgba(0,0,0,.55)}
     .cta .lede{margin:0 auto;color:rgba(255,255,255,.92);max-width:48ch;text-shadow:0 1px 10px rgba(0,0,0,.5)}
@@ -531,6 +531,11 @@
 
     /* ---------- responsive ---------- */
     @media (max-width:1100px){
+      /* hero (ecd65d2): pada tablet/landscape, foto bergeser 70% + scrim lebih
+         gelap di kiri agar teks tetap terbaca — persis versi sebelumnya */
+      .hero::before{background:linear-gradient(90deg,rgba(30,31,34,.90) 0%,rgba(30,31,34,.62) 55%,rgba(30,31,34,.30) 100%),url("assets/hero-space.webp") 70% center/cover no-repeat #1E1F22}
+      .hero-content-wrap{position:static}
+      .hero-content{max-width:100%}
       .quotes{grid-template-columns:repeat(2,1fr)}
       .services{grid-template-columns:repeat(2,1fr)}
       .svc:nth-child(3n+2),.svc:nth-child(3n+3){margin-top:0}
@@ -583,23 +588,11 @@
         overflow-y:auto;
         padding-bottom:calc(2rem + env(safe-area-inset-bottom));
       }
-      /* hero mobile v10: teks di atas latar bersih (bukan foto ter-zoom),
-         artwork hero jadi "band" di bawah teks lalu larut ke latar halaman */
-      .hero{padding-top:80px;padding-bottom:0;background:transparent}
-      .hero::before{display:none}
-      .hero::after{
-        content:"";
-        position:relative;z-index:1;display:block;
-        width:100%;height:clamp(160px,46vw,200px);
-        margin-top:1.25rem;
-        background:url("assets/hero-space.jpg") 50% 58%/cover no-repeat;
-        -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 22%,#000 82%,transparent 100%);
-        mask-image:linear-gradient(180deg,transparent 0%,#000 22%,#000 82%,transparent 100%);
-      }
-      .hero-content-wrap{position:relative;z-index:2}
+      /* hero mobile: kembali ke gaya ecd65d2 — foto full-bleed di belakang teks
+         dengan scrim kiri (bukan band v10); posisi foto 70% center */
+      .hero::before{background:linear-gradient(90deg,rgba(30,31,34,.90) 0%,rgba(30,31,34,.62) 55%,rgba(30,31,34,.30) 100%),url("assets/hero-space.webp") 70% center/cover no-repeat #1E1F22}
+      .hero-content-wrap{position:static}
       .hero-content{max-width:100%}
-      .hero h1{font-size:clamp(2.4rem,5.8vw,3.2rem)}
-      .hero-note{margin-top:-.5rem;margin-bottom:1.5rem}
       .modules{grid-template-columns:repeat(2,1fr)}
       .module{grid-column:span 1}
       .module--wide{grid-column:span 2}
@@ -618,18 +611,10 @@
       .plan{min-width:0}
       .plan-feats-toggle summary{font-size:clamp(.6rem,2.8vw,.72rem);gap:.35rem;padding-inline:.4rem;letter-spacing:.02em}
       .plan-feats-toggle summary i{flex:0 0 auto}
-      /* hero: tipe lebih kalem + wrap alami supaya tidak jadi 6 baris raksasa */
-      .hero h1{font-size:clamp(2.05rem,8.6vw,2.75rem);line-height:.98;letter-spacing:-.015em}
-      .hero h1 br{display:none}
-      .hero-eyebrow{gap:.5rem;margin-bottom:1.05rem}
-      .hero-eyebrow .label{font-size:.64rem;letter-spacing:.1em;gap:.45rem}
-      .hero-eyebrow .label--mark::before{width:7px;height:7px;border-radius:2px}
-      .hero-eyebrow .tag{font-size:.58rem;padding:.28rem .55rem;letter-spacing:.1em}
-      .hero .lede{font-size:.95rem;line-height:1.6;margin-bottom:1.5rem}
-      .hero-actions{flex-direction:column;align-items:stretch;gap:.6rem;margin-bottom:1.25rem}
+      /* hero mobile (ecd65d2): tombol penuh lebar + wrap alur; foto tetap
+         full-bleed di belakang teks, tipe kembali ke ukuran base */
+      .hero-actions{flex-direction:column;align-items:stretch}
       .hero-actions .btn{width:100%}
-      .hero-note{font-size:.64rem;line-height:1.55;letter-spacing:.06em;margin:-.15rem 0 1.25rem}
-      .hero::after{height:clamp(150px,44vw,190px);margin-top:1rem}
       /* CTA: teks di kartu bersih, karakter jadi band di bawah — crop landscape
          tidak lagi dipaksa memenuhi kartu portrait dan menabrak teks */
       .cta-inner{
@@ -639,7 +624,7 @@
       }
       .cta-inner::after{
         content:"";position:absolute;left:0;right:0;bottom:0;height:190px;z-index:0;pointer-events:none;
-        background:url("assets/cta-characters.jpg") 50% 62%/cover no-repeat;
+        background:url("assets/cta-characters.webp") 50% 62%/cover no-repeat;
         -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 26%,#000 100%);
         mask-image:linear-gradient(180deg,transparent 0%,#000 26%,#000 100%);
       }
@@ -664,7 +649,7 @@
   <header class="site-head">
     <div class="wrap">
       <a href="#top" class="brand" aria-label="V-Project, kembali ke atas">
-        <img class="brand-mark" src="assets/logo-globe-transparent.png" alt="Logo V-Project">
+        <img class="brand-mark" src="assets/logo-globe-transparent.webp" alt="Logo V-Project">
         <span>V-Project</span>
       </a>
       <nav class="nav-list" aria-label="Navigasi utama">
