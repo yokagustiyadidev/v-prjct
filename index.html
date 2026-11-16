@@ -71,6 +71,9 @@
       text-rendering:optimizeLegibility;
       overflow-x:hidden;
     }
+    /* overflow-x:hidden pada body membuat body jadi scroll container dan
+       mematikan position:sticky di Safari iOS lama; clip tidak. */
+    @supports (overflow:clip){body{overflow-x:clip}}
     /* grain halus (feTurbulence, blend overlay, dibuat ringan) */
     body::after{
       content:"";position:fixed;inset:0;z-index:2000;pointer-events:none;
@@ -263,15 +266,6 @@
     .draw--js .draw-line.is-active p{display:block;font-size:13px;line-height:1.55;color:var(--text-2);max-width:56ch;margin:.75rem auto 0;text-wrap:pretty}
     .draw--js .draw-caption{display:none}
     .draw--js .draw-hint{display:block;flex:0 0 auto;text-align:center;font-family:var(--mono);font-size:13px;color:var(--text-2);padding-bottom:.5rem}
-    @media (prefers-reduced-motion:reduce){
-      .draw--js .draw{height:auto}
-      .draw--js .draw-pin{position:relative;height:auto;display:block;overflow:visible;padding:0}
-      .draw--js .draw-stage{display:grid;perspective:none}
-      .draw--js .draw-line{position:relative;left:auto;top:auto;width:auto}
-      .draw--js .draw-line h3{color:inherit}
-      .draw--js .draw-caption{display:none}
-      .draw--js .draw-hint{display:none}
-    }
     @media (max-width:620px){
       .draw--js .draw-line h3{font-size:clamp(2.1rem,11.5vw,3rem)}
       .draw--js .draw-caption{position:static;max-width:52ch;margin-top:1rem}
@@ -1220,7 +1214,11 @@
 
       /* produk: garis teks raksasa ala "The Draw" (tasteskill.dev) */
       var draw = document.getElementById('drawProduk');
-      if (draw && !reduce && 'requestAnimationFrame' in window) {
+      /* mode "halus": device minta reduced motion — tetap ada pergantian modul saat
+         digulir, tapi tanpa gerak 3D/parallax (hanya fade). */
+      var drawSoft = reduce;
+      var drawActive = function () { return !drawSoft || window.innerWidth <= 900; };
+      if (draw && 'requestAnimationFrame' in window) {
         var drawSection = document.getElementById('produk');
         var drawLines = Array.prototype.slice.call(draw.querySelectorAll('.draw-line'));
         var drawCurrent = draw.querySelector('.draw-current');
@@ -1231,10 +1229,36 @@
           return p ? p.textContent : '';
         });
         var drawN = drawLines.length;
-        drawSection.classList.add('draw--js');
         var drawTicking = false, drawActiveIdx = -1;
         function paintDraw() {
           drawTicking = false;
+          if (!drawActive()) {
+            /* mode statis (desktop + reduced motion): daftar biasa, counter tidak berubah */
+            if (drawCurrent && drawCurrent.textContent !== '1') drawCurrent.textContent = '1';
+            return;
+          }
+          var soft = drawSoft;
+          if (soft) {
+            /* fade sederhana: modul aktif tetap di tengah, lainnya transparan */
+            var r2 = draw.getBoundingClientRect();
+            var span2 = Math.max(r2.height - (window.innerHeight || 1), 1);
+            var p2 = Math.min(Math.max(-r2.top / span2, 0), 1) * (drawN - 1);
+            var idx2 = Math.round(p2);
+            drawLines.forEach(function (line, i) {
+              line.style.transform = 'translateY(-50%)';
+              line.style.opacity = i === idx2 ? '1' : '0';
+              line.style.pointerEvents = i === idx2 ? 'auto' : 'none';
+              line.classList.toggle('is-active', i === idx2);
+              line.setAttribute('aria-hidden', i === idx2 ? 'false' : 'true');
+            });
+            if (idx2 !== drawActiveIdx) {
+              drawActiveIdx = idx2;
+              if (drawCurrent) drawCurrent.textContent = String(idx2 + 1);
+              if (drawCaption) drawCaption.textContent = drawDescs[idx2] || '';
+              if (drawHint) drawHint.style.visibility = idx2 === drawN - 1 ? 'hidden' : 'visible';
+            }
+            return;
+          }
           var rect = draw.getBoundingClientRect();
           var vh = window.innerHeight || 1;
           var span = Math.max(rect.height - vh, 1);
@@ -1266,9 +1290,23 @@
         function requestDraw() {
           if (!drawTicking) { drawTicking = true; requestAnimationFrame(paintDraw); }
         }
+        function applyDrawMode() {
+          var on = drawActive();
+          drawSection.classList.toggle('draw--js', on);
+          if (on) { paintDraw(); return; }
+          /* mode statis: kembalikan semua baris ke daftar biasa */
+          drawLines.forEach(function (line) {
+            line.style.transform = '';
+            line.style.opacity = '';
+            line.style.zIndex = '';
+            line.style.pointerEvents = '';
+            line.removeAttribute('aria-hidden');
+            line.classList.remove('is-active');
+          });
+        }
         window.addEventListener('scroll', requestDraw, { passive: true });
-        window.addEventListener('resize', requestDraw);
-        paintDraw();
+        window.addEventListener('resize', function () { applyDrawMode(); requestDraw(); });
+        applyDrawMode();
       }
 
       /* faq: akordeon (satu terbuka) + pencarian */
