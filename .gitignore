@@ -1,0 +1,9 @@
+# hasil kerja skill (screenshot audit, cache) — bukan bagian situs
+.taste-skill/
+
+# metadata sementara proses generate gambar
+assets/media-generation-*.json
+
+.vercel
+.DS_Store
+Thumbs.db
