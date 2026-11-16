@@ -497,7 +497,7 @@
     }
 
     /* ---------- reveal ---------- */
-    .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+    .reveal{opacity:1;transform:none}
     .reveal.in{opacity:1;transform:none}
 
     @media (prefers-reduced-motion:reduce){
@@ -730,7 +730,7 @@
         </div>
 
         <div class="pricing">
-          <article class="plan-row reveal">
+          <article class="plan-row">
             <div class="plan-panel">
               <div class="plan-window">
                 <div class="plan-window-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="plan-window-title">Coba Gratis</span></div>
@@ -772,7 +772,7 @@
             </div>
           </article>
 
-          <article class="plan-row plan-row--flip reveal" style="transition-delay:.06s">
+          <article class="plan-row plan-row--flip">
             <div class="plan-panel">
               <div class="plan-window">
                 <div class="plan-window-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="plan-window-title">Basic</span></div>
@@ -814,7 +814,7 @@
             </div>
           </article>
 
-          <article class="plan-row plan-row--hero reveal" style="transition-delay:.12s">
+          <article class="plan-row plan-row--hero">
             <div class="plan-panel">
               <div class="plan-window">
                 <div class="plan-window-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="plan-window-title">Paket V-Project</span></div>
@@ -869,7 +869,7 @@
         </div>
 
         <div class="services">
-          <article class="svc svc--wide card reveal">
+          <article class="svc svc--wide card">
             <div class="svc-media">
               <img src="assets/resp/web@640.webp"
                    srcset="assets/resp/web@480.webp 480w, assets/resp/web@640.webp 640w, assets/resp/web@960.webp 960w"
@@ -885,7 +885,7 @@
             </div>
           </article>
 
-          <article class="svc svc--narrow card reveal" style="transition-delay:.06s">
+          <article class="svc svc--narrow card">
             <div class="svc-media">
               <img src="assets/resp/greeting@640.webp"
                    srcset="assets/resp/greeting@480.webp 480w, assets/resp/greeting@640.webp 640w, assets/resp/greeting@960.webp 960w"
@@ -901,7 +901,7 @@
             </div>
           </article>
 
-          <article class="svc svc--narrow card reveal" style="transition-delay:.12s">
+          <article class="svc svc--narrow card">
             <div class="svc-media">
               <img src="assets/resp/wedding@640.webp"
                    srcset="assets/resp/wedding@480.webp 480w, assets/resp/wedding@640.webp 640w, assets/resp/wedding@960.webp 960w"
@@ -917,7 +917,7 @@
             </div>
           </article>
 
-          <article class="svc svc--wide card reveal" style="transition-delay:.18s">
+          <article class="svc svc--wide card">
             <div class="svc-media">
               <img src="assets/resp/portfolio@640.webp"
                    srcset="assets/resp/portfolio@480.webp 480w, assets/resp/portfolio@640.webp 640w, assets/resp/portfolio@960.webp 960w"
@@ -933,7 +933,7 @@
             </div>
           </article>
 
-          <article class="svc card reveal" style="transition-delay:.24s">
+          <article class="svc card">
             <div class="svc-media">
               <img src="assets/resp/dashboard@640.webp"
                    srcset="assets/resp/dashboard@480.webp 480w, assets/resp/dashboard@640.webp 640w, assets/resp/dashboard@960.webp 960w"
@@ -949,7 +949,7 @@
             </div>
           </article>
 
-          <article class="svc card reveal" style="transition-delay:.30s">
+          <article class="svc card">
             <div class="svc-media">
               <img src="assets/resp/automation@640.webp"
                    srcset="assets/resp/automation@480.webp 480w, assets/resp/automation@640.webp 640w, assets/resp/automation@960.webp 960w"
@@ -993,7 +993,7 @@
           <img src="assets/faq-character.png" alt="Ilustrasi pertanyaan yang sering diajukan" width="1024" height="1024" loading="lazy">
         </figure>
 
-        <div class="faq-list reveal" style="transition-delay:.08s">
+        <div class="faq-list">
           <article class="faq-item is-open">
             <h3><button type="button" class="faq-q" aria-expanded="true" aria-controls="faq-a1" id="faq-q1"><span class="faq-q-text">Berapa lama implementasi dashboard sekolah?</span><span class="faq-icon" aria-hidden="true"></span></button></h3>
             <div class="faq-a-wrap" id="faq-a1" role="region" aria-labelledby="faq-q1"><p class="faq-a">Rata-rata 3–4 pekan, tergantung kustomisasi. Selama setup kami koordinasi intensif, termasuk jadwal training.</p></div>
@@ -1041,7 +1041,7 @@
         </div>
 
         <div class="quotes">
-          <figure class="quote quote--a card reveal">
+          <figure class="quote quote--a card">
             <span class="quote-stars" role="img" aria-label="5 dari 5 bintang">★★★★★</span>
             <p>Mantap, admin fast respon.</p>
             <figcaption class="quote-by">
@@ -1052,7 +1052,7 @@
             </figcaption>
           </figure>
 
-          <figure class="quote quote--b card reveal" style="transition-delay:.08s">
+          <figure class="quote quote--b card">
             <span class="quote-stars" role="img" aria-label="5 dari 5 bintang">★★★★★</span>
             <p>Rekomended, gak mengecewakan.</p>
             <figcaption class="quote-by">
@@ -1063,7 +1063,7 @@
             </figcaption>
           </figure>
 
-          <figure class="quote quote--b card reveal" style="transition-delay:.16s">
+          <figure class="quote quote--b card">
             <span class="quote-stars" role="img" aria-label="5 dari 5 bintang">★★★★★</span>
             <p>Undangan nikahnya lucuuu.</p>
             <figcaption class="quote-by">
@@ -1074,7 +1074,7 @@
             </figcaption>
           </figure>
 
-          <figure class="quote quote--a card reveal" style="transition-delay:.24s">
+          <figure class="quote quote--a card">
             <span class="quote-stars" role="img" aria-label="5 dari 5 bintang">★★★★★</span>
             <p>Automation Hermes Agent dan n8n sangat membantu, bener bener diajarin sampe bisa.</p>
             <figcaption class="quote-by">
@@ -1091,7 +1091,7 @@
     <!-- ================= CTA ================= -->
     <section id="kontak" class="band cta">
       <div class="wrap">
-        <div class="cta-inner reveal">
+        <div class="cta-inner">
           <img class="cta-media" src="assets/resp/cta-characters@1280.webp"
                srcset="assets/resp/cta-characters@800.webp 800w, assets/resp/cta-characters@1280.webp 1280w, assets/resp/cta-characters@1600.webp 1600w"
                sizes="(max-width:900px) 100vw, 1080px"
@@ -1329,11 +1329,17 @@
         var anim = function (targets, props) {
           try { return animate(targets, props); } catch (e) { return null; }
         };
-        var revealIn = function (el) {
+        var show = function (el) {
           if (!el) return;
           el.classList.add('in');
           var r = el.closest('.reveal');
           if (r) r.classList.add('in');
+          /* tampilkan langsung: hindari efek fade/reveal yang terasa seperti loading */
+          if (el.style) {
+            el.style.transitionProperty = 'opacity, transform';
+            el.style.transitionDuration = '0s';
+            el.style.opacity = '1';
+          }
         };
         var onceIO = function (selector, cb, opts) {
           var el = document.querySelector(selector);
@@ -1343,7 +1349,7 @@
             entries.forEach(function (entry) {
               if (entry.isIntersecting && !once) {
                 once = true;
-                revealIn(entry.target);
+                show(entry.target);
                 cb(entry.target);
                 io.unobserve(entry.target);
               }
@@ -1352,41 +1358,40 @@
           io.observe(el);
         };
 
-        /* hero: staggered entrance */
-        onceIO('.hero-content', function (el) {
-          anim(el.querySelectorAll('h1, .lede, .hero-actions, .hero-note'), {
-            opacity: [0, 1],
-            translateY: [18, 0],
-            duration: 700,
-            delay: stagger ? stagger(90) : 90,
+        /* hero: entrance tanpa fade (langsung terlihat, hanya gerak) */
+        var heroEl = document.querySelector('.hero-content');
+        if (heroEl) {
+          show(heroEl);
+          anim(heroEl.querySelectorAll('h1, .lede, .hero-actions, .hero-note'), {
+            translateY: [14, 0],
+            duration: 600,
+            delay: stagger ? stagger(70) : 70,
             ease: 'out(3)',
           });
-        }, { threshold: 0.1 });
+        }
 
-        /* produk: top label + stage nudge on enter */
+        /* produk: nudge ringan saat masuk */
         onceIO('#produk', function (el) {
-          anim(el.querySelectorAll('.draw-top, .draw-stage, .draw-hint'), {
-            opacity: [0, 1],
-            translateY: [12, 0],
-            duration: 600,
-            delay: stagger ? stagger(80) : 80,
+          anim(el.querySelectorAll('.draw-top, .draw-hint'), {
+            translateY: [8, 0],
+            duration: 450,
+            delay: stagger ? stagger(60) : 60,
             ease: 'out(3)',
           });
         });
 
-        /* section heads: stagger kicker/title/lede */
+        /* section heads: geser halus, tanpa fade */
         document.querySelectorAll('.sec-head').forEach(function (el) {
           var once = false;
           var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
               if (entry.isIntersecting && !once) {
                 once = true;
-                revealIn(entry.target);
+                show(entry.target);
                 anim(entry.target.querySelectorAll('.kicker, h2, .lede'), {
-                  opacity: [0, 1],
-                  translateY: [14, 0],
-                  duration: 600,
-                  delay: stagger ? stagger(80) : 80,
+                  translateY: [10, 0],
+                  duration: 480,
+                  delay: stagger ? stagger(60) : 60,
                   ease: 'out(3)',
                 });
                 io.unobserve(entry.target);
@@ -1396,97 +1401,94 @@
           io.observe(el);
         });
 
-        /* proses: journey path fade + step stagger */
+        /* proses: angka pop + konten geser (tanpa fade/loading) */
         onceIO('#proses', function (el) {
-          anim(el.querySelectorAll('.journey-line'), {
-            opacity: [0, 1],
-            duration: 900,
-            ease: 'out(3)',
-          });
           anim(el.querySelectorAll('.journey-num'), {
-            opacity: [0, 1],
-            scale: [0.8, 1],
-            duration: 520,
-            delay: stagger ? stagger(120) : 120,
+            scale: [0.88, 1],
+            duration: 420,
+            delay: stagger ? stagger(100) : 100,
             ease: 'out(3)',
           });
           anim(el.querySelectorAll('.journey-step h3, .journey-step p, .journey-meta'), {
-            opacity: [0, 1],
-            translateY: [10, 0],
-            duration: 520,
-            delay: stagger ? stagger(60, { start: 120 }) : 180,
+            translateY: [8, 0],
+            duration: 420,
+            delay: stagger ? stagger(50, { start: 80 }) : 130,
             ease: 'out(3)',
           });
         });
 
-        /* harga: plan rows slide-in */
+        /* harga: kartu geser masuk (langsung terlihat) */
         document.querySelectorAll('.plan-row').forEach(function (el, i) {
+          show(el);
           var once = false;
           var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
               if (entry.isIntersecting && !once) {
                 once = true;
-                revealIn(entry.target);
                 anim(entry.target, {
-                  opacity: [0, 1],
-                  translateY: [22, 0],
-                  duration: 700,
-                  delay: i * 70,
+                  translateY: [16, 0],
+                  duration: 520,
+                  delay: i * 50,
                   ease: 'out(3)',
                 });
                 io.unobserve(entry.target);
               }
             });
-          }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+          }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
           io.observe(el);
         });
 
-        /* layanan: service cards stagger */
+        /* layanan: kartu layanan geser masuk (langsung terlihat) */
         onceIO('#layanan .services', function (el) {
+          el.querySelectorAll('.svc').forEach(show);
           anim(el.querySelectorAll('.svc'), {
-            opacity: [0, 1],
-            translateY: [20, 0],
-            duration: 620,
+            translateY: [14, 0],
+            duration: 480,
+            delay: stagger ? stagger(55) : 55,
+            ease: 'out(3)',
+          });
+        });
+
+        /* faq: item geser masuk (langsung terlihat) */
+        onceIO('#faq .faq-list', function (el) {
+          el.querySelectorAll('.faq-item').forEach(show);
+          anim(el.querySelectorAll('.faq-item'), {
+            translateY: [8, 0],
+            duration: 400,
+            delay: stagger ? stagger(35) : 35,
+            ease: 'out(3)',
+          });
+        });
+
+        /* testimoni: kartu geser masuk (langsung terlihat) */
+        onceIO('#testimoni .quotes', function (el) {
+          el.querySelectorAll('.quote').forEach(show);
+          anim(el.querySelectorAll('.quote'), {
+            translateY: [12, 0],
+            duration: 480,
             delay: stagger ? stagger(70) : 70,
             ease: 'out(3)',
           });
         });
 
-        /* faq: items stagger */
-        onceIO('#faq .faq-list', function (el) {
-          anim(el.querySelectorAll('.faq-item'), {
-            opacity: [0, 1],
-            translateY: [10, 0],
-            duration: 480,
-            delay: stagger ? stagger(45) : 45,
-            ease: 'out(3)',
-          });
-        });
-
-        /* testimoni: quote cards stagger */
-        onceIO('#testimoni .quotes', function (el) {
-          anim(el.querySelectorAll('.quote'), {
-            opacity: [0, 1],
-            translateY: [18, 0],
-            duration: 620,
-            delay: stagger ? stagger(90) : 90,
-            ease: 'out(3)',
-          });
-        });
-
-        /* cta: inner scale-in + single button nudge */
-        onceIO('#kontak .cta-inner', function (el) {
-          anim(el, { opacity: [0, 1], scale: [0.985, 1], duration: 700, ease: 'out(3)' });
-          var btn = el.querySelector('.btn--blue');
-          if (btn) {
-            anim(btn, {
-              scale: [1, 1.03, 1],
-              duration: 520,
-              delay: 350,
-              ease: 'inOut(2)',
+        /* cta: scale-in halus + nudge tombol, tanpa fade */
+        var ctaEl = document.querySelector('#kontak .cta-inner');
+        if (ctaEl) {
+          show(ctaEl);
+          var ctaOnce = false;
+          var ctaIO = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting && !ctaOnce) {
+                ctaOnce = true;
+                anim(ctaEl, { scale: [0.992, 1], duration: 520, ease: 'out(3)' });
+                var btn = ctaEl.querySelector('.btn--blue');
+                if (btn) anim(btn, { scale: [1, 1.03, 1], duration: 420, delay: 260, ease: 'inOut(2)' });
+                ctaIO.unobserve(ctaEl);
+              }
             });
-          }
-        });
+          }, { threshold: 0.2 });
+          ctaIO.observe(ctaEl);
+        }
       }
 
       /* faq: akordeon (satu terbuka) + pencarian */
