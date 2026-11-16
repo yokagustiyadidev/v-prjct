@@ -150,9 +150,12 @@
       backdrop-filter:blur(14px) saturate(140%);
       border:1px solid rgba(255,255,255,.14);
       border-radius:16px;
-      transition:background .25s var(--ease);
+      transition:background .25s var(--ease), transform .35s var(--ease), opacity .35s var(--ease);
     }
     .site-head.is-scrolled{background:rgba(7,13,36,.85)}
+    @media (min-width:861px){
+      .site-head.is-hidden{opacity:0;transform:translate(-50%, calc(-100% - 24px));pointer-events:none}
+    }
     .site-head .nav-inner{display:flex;align-items:center;justify-content:space-between;height:50px;gap:1rem;padding:0 8px 0 14px}
     .brand{display:flex;align-items:center;gap:.6rem;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--hero-text);white-space:nowrap}
     .brand-mark{width:28px;height:28px;flex:0 0 auto;display:block;object-fit:contain;aspect-ratio:1/1}
@@ -1172,10 +1175,18 @@
       var animate = A.animate;
       var stagger = A.stagger;
       var onScroll = A.onScroll;
-      /* nav pill lebih pekat saat discroll */
+      /* nav pill lebih pekat saat discroll; sembunyikan di desktop saat keluar dari hero */
       var head = document.querySelector('.site-head');
+      var hero = document.querySelector('.hero');
       function updateHead() {
-        if (head) head.classList.toggle('is-scrolled', window.scrollY > 24);
+        if (!head) return;
+        head.classList.toggle('is-scrolled', window.scrollY > 24);
+        var desktop = window.innerWidth > 860;
+        if (desktop && hero) {
+          head.classList.toggle('is-hidden', hero.getBoundingClientRect().bottom <= 62);
+        } else {
+          head.classList.remove('is-hidden');
+        }
       }
       window.addEventListener('scroll', updateHead, { passive: true });
       window.addEventListener('resize', updateHead);
