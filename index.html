@@ -1164,10 +1164,14 @@
     <div class="foot-giant" aria-hidden="true">V—Project</div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/animejs/dist/bundles/anime.umd.min.js"></script>
   <script>
     (function () {
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
+      var A = (window.anime && window.anime) || {};
+      var animate = A.animate;
+      var stagger = A.stagger;
+      var onScroll = A.onScroll;
       /* nav pill lebih pekat saat discroll */
       var head = document.querySelector('.site-head');
       function updateHead() {
@@ -1307,6 +1311,171 @@
         window.addEventListener('scroll', requestDraw, { passive: true });
         window.addEventListener('resize', function () { applyDrawMode(); requestDraw(); });
         applyDrawMode();
+      }
+
+      /* ---------- micro-animations (anime.js) ---------- */
+      if (!reduce && animate) {
+        var anim = function (targets, props) {
+          try { return animate(targets, props); } catch (e) { return null; }
+        };
+        var revealIn = function (el) {
+          if (!el) return;
+          el.classList.add('in');
+          var r = el.closest('.reveal');
+          if (r) r.classList.add('in');
+        };
+        var onceIO = function (selector, cb, opts) {
+          var el = document.querySelector(selector);
+          if (!el) return;
+          var once = false;
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting && !once) {
+                once = true;
+                revealIn(entry.target);
+                cb(entry.target);
+                io.unobserve(entry.target);
+              }
+            });
+          }, opts || { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+          io.observe(el);
+        };
+
+        /* hero: staggered entrance */
+        onceIO('.hero-content', function (el) {
+          anim(el.querySelectorAll('h1, .lede, .hero-actions, .hero-note'), {
+            opacity: [0, 1],
+            translateY: [18, 0],
+            duration: 700,
+            delay: stagger ? stagger(90) : 90,
+            ease: 'out(3)',
+          });
+        }, { threshold: 0.1 });
+
+        /* produk: top label + stage nudge on enter */
+        onceIO('#produk', function (el) {
+          anim(el.querySelectorAll('.draw-top, .draw-stage, .draw-hint'), {
+            opacity: [0, 1],
+            translateY: [12, 0],
+            duration: 600,
+            delay: stagger ? stagger(80) : 80,
+            ease: 'out(3)',
+          });
+        });
+
+        /* section heads: stagger kicker/title/lede */
+        document.querySelectorAll('.sec-head').forEach(function (el) {
+          var once = false;
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting && !once) {
+                once = true;
+                revealIn(entry.target);
+                anim(entry.target.querySelectorAll('.kicker, h2, .lede'), {
+                  opacity: [0, 1],
+                  translateY: [14, 0],
+                  duration: 600,
+                  delay: stagger ? stagger(80) : 80,
+                  ease: 'out(3)',
+                });
+                io.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' });
+          io.observe(el);
+        });
+
+        /* proses: journey path fade + step stagger */
+        onceIO('#proses', function (el) {
+          anim(el.querySelectorAll('.journey-line'), {
+            opacity: [0, 1],
+            duration: 900,
+            ease: 'out(3)',
+          });
+          anim(el.querySelectorAll('.journey-num'), {
+            opacity: [0, 1],
+            scale: [0.8, 1],
+            duration: 520,
+            delay: stagger ? stagger(120) : 120,
+            ease: 'out(3)',
+          });
+          anim(el.querySelectorAll('.journey-step h3, .journey-step p, .journey-meta'), {
+            opacity: [0, 1],
+            translateY: [10, 0],
+            duration: 520,
+            delay: stagger ? stagger(60, { start: 120 }) : 180,
+            ease: 'out(3)',
+          });
+        });
+
+        /* harga: plan rows slide-in */
+        document.querySelectorAll('.plan-row').forEach(function (el, i) {
+          var once = false;
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting && !once) {
+                once = true;
+                revealIn(entry.target);
+                anim(entry.target, {
+                  opacity: [0, 1],
+                  translateY: [22, 0],
+                  duration: 700,
+                  delay: i * 70,
+                  ease: 'out(3)',
+                });
+                io.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+          io.observe(el);
+        });
+
+        /* layanan: service cards stagger */
+        onceIO('#layanan .services', function (el) {
+          anim(el.querySelectorAll('.svc'), {
+            opacity: [0, 1],
+            translateY: [20, 0],
+            duration: 620,
+            delay: stagger ? stagger(70) : 70,
+            ease: 'out(3)',
+          });
+        });
+
+        /* faq: items stagger */
+        onceIO('#faq .faq-list', function (el) {
+          anim(el.querySelectorAll('.faq-item'), {
+            opacity: [0, 1],
+            translateY: [10, 0],
+            duration: 480,
+            delay: stagger ? stagger(45) : 45,
+            ease: 'out(3)',
+          });
+        });
+
+        /* testimoni: quote cards stagger */
+        onceIO('#testimoni .quotes', function (el) {
+          anim(el.querySelectorAll('.quote'), {
+            opacity: [0, 1],
+            translateY: [18, 0],
+            duration: 620,
+            delay: stagger ? stagger(90) : 90,
+            ease: 'out(3)',
+          });
+        });
+
+        /* cta: inner scale-in + single button nudge */
+        onceIO('#kontak .cta-inner', function (el) {
+          anim(el, { opacity: [0, 1], scale: [0.985, 1], duration: 700, ease: 'out(3)' });
+          var btn = el.querySelector('.btn--blue');
+          if (btn) {
+            anim(btn, {
+              scale: [1, 1.03, 1],
+              duration: 520,
+              delay: 350,
+              ease: 'inOut(2)',
+            });
+          }
+        });
       }
 
       /* faq: akordeon (satu terbuka) + pencarian */
