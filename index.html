@@ -222,34 +222,41 @@
     .hero h1{margin-bottom:1.5rem;color:var(--hero-text);font-size:clamp(38px,5.4vw,72px)}
     .hero .lede{margin:0 auto 2rem;color:rgba(242,245,255,.85)}
     .hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;margin-bottom:1.5rem}
+    /* ---------- hero: tombol aksi tanpa shadow ---------- */
+    .hero .btn{border-radius:14px;font-weight:600;box-shadow:none;text-shadow:none}
     .hero .btn--blue{
-      background:rgba(88,101,242,.42);color:#fff;
-      border:1px solid rgba(255,255,255,.55);
-      -webkit-backdrop-filter:blur(16px) saturate(150%);
-      backdrop-filter:blur(16px) saturate(150%);
-      box-shadow:0 10px 28px -10px rgba(7,13,36,.55), inset 0 1px 0 rgba(255,255,255,.45);
-      text-shadow:0 1px 2px rgba(0,0,0,.3);
+      background:var(--accent);color:#fff;
+      border:1px solid rgba(255,255,255,.2);
+      box-shadow:none;
     }
     .hero .btn--blue:hover{
-      background:rgba(88,101,242,.62);
-      border-color:rgba(255,255,255,.75);
-      box-shadow:0 14px 32px -10px rgba(7,13,36,.65), inset 0 1px 0 rgba(255,255,255,.55);
+      background:#4752C4;
+      border-color:rgba(255,255,255,.4);
       transform:translateY(-2px);
+      box-shadow:none;
+    }
+    .hero .btn--blue:active{
+      transform:translateY(1px);
+      box-shadow:none;
     }
     .hero .btn--line{
-      background:rgba(255,255,255,.12);color:#fff;
-      border:1px solid rgba(255,255,255,.40);
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.35);
       -webkit-backdrop-filter:blur(16px) saturate(140%);
       backdrop-filter:blur(16px) saturate(140%);
-      box-shadow:0 10px 28px -10px rgba(7,13,36,.40), inset 0 1px 0 rgba(255,255,255,.30);
-      text-shadow:0 1px 2px rgba(0,0,0,.3);
+      box-shadow:none;
     }
     .hero .btn--line:hover{
-      background:rgba(255,255,255,.22);
-      border-color:rgba(255,255,255,.65);
+      background:rgba(255,255,255,.24);
+      border-color:rgba(255,255,255,.55);
       color:#fff;
-      box-shadow:0 14px 32px -10px rgba(7,13,36,.50), inset 0 1px 0 rgba(255,255,255,.45);
       transform:translateY(-2px);
+      box-shadow:none;
+    }
+    .hero .btn--line:active{
+      transform:translateY(1px);
+      box-shadow:none;
     }
     .hero-note{font-size:15px;font-weight:500;color:rgba(10,18,48,.8)}
 
@@ -602,10 +609,7 @@
         <a href="#faq">FAQ</a>
       </nav>
       <div class="head-cta">
-        <a href="#kontak" class="btn btn--blue">
-          <svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-chat-circle-dots"></use></svg>
-          Konsultasi Gratis
-        </a>
+        <a href="#kontak" class="btn btn--blue">Konsultasi Gratis</a>
         <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false" aria-controls="mobilePanel">
           <svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-list"></use></svg>
         </button>
@@ -619,10 +623,7 @@
     <a href="#layanan">Layanan</a>
     <a href="#proses">Proses</a>
     <a href="#faq">FAQ</a>
-    <a href="#kontak" class="btn btn--blue">
-      <svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-chat-circle-dots"></use></svg>
-      Konsultasi Gratis
-    </a>
+    <a href="#kontak" class="btn btn--blue">Konsultasi Gratis</a>
   </div>
 
   <main id="main">
@@ -637,10 +638,7 @@
           <h1 class="display">Satu platform menangani kebutuhan produk digitalmu.</h1>
           <p class="lede">Nilai, absensi, CBT, dan rapor dalam satu tempat. Website dan undangan digital juga kami kerjakan.</p>
           <div class="hero-actions">
-            <a href="#kontak" class="btn btn--blue">
-              <svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-chat-circle-dots"></use></svg>
-              Mulai proyek
-            </a>
+            <a href="#kontak" class="btn btn--blue">Mulai proyek</a>
             <a href="#produk" class="btn btn--line">
               <svg class="ph" aria-hidden="true" focusable="false"><use href="#ph-arrow-down"></use></svg>
               Lihat produk &amp; harga
