@@ -264,9 +264,9 @@
     .hero-doodles{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden}
     .clay-obj{position:absolute;box-sizing:border-box;will-change:transform}
 
-    /* 1. Clay Star Gold */
+    /* 1. Clay Star Gold Small */
     .clay-star{display:block;filter:drop-shadow(0 16px 30px rgba(5,9,30,.48))}
-    .clay-star--gold{left:clamp(2%,5vw,7%);top:18%;width:48px;height:48px;animation:clay-spin-float 7s ease-in-out infinite}
+    .clay-star--gold{left:clamp(2%,5vw,7%);top:17%;width:36px;height:36px;animation:clay-spin-float 8s ease-in-out infinite}
 
     /* 2. Clay Plus Gold */
     .clay-plus{position:absolute;filter:drop-shadow(0 10px 20px rgba(5,9,30,.42))}
@@ -279,35 +279,13 @@
     .clay-plus--gold .clay-plus-bar--v{width:8px;height:26px;left:9px;top:0}
     .clay-plus--gold .clay-plus-bar--h{width:26px;height:8px;left:0;top:9px}
 
-    /* 3. Clay Orb Gold */
-    .clay-orb-gold{
-      left:clamp(3%,6vw,9%);top:46%;width:56px;height:56px;border-radius:50%;
-      background:radial-gradient(circle at 32% 28%,#FFF9D2 0%,#FEE75C 45%,#D48E00 100%);
-      box-shadow:
-        0 18px 34px rgba(5,9,30,.5),
-        inset 5px 5px 10px rgba(255,255,255,.9),
-        inset -5px -5px 12px rgba(140,75,0,.55);
-      animation:clay-float-2 5s ease-in-out infinite .2s;
+    /* 3. Clay Star Main (menggantikan bulat kuning dengan style claymorphism) */
+    .clay-star--main{
+      left:clamp(3%,6vw,9%);top:45%;width:58px;height:58px;
+      animation:clay-spin-float 6.5s ease-in-out infinite .3s;
     }
 
-    /* 4. Clay Donut / Torus Lavender */
-    .clay-donut{
-      left:clamp(3%,5.5vw,8%);top:73%;width:52px;height:52px;border-radius:50%;
-      background:radial-gradient(circle at 32% 28%,#E0E7FF 0%,#C7D6FF 45%,#7983F5 100%);
-      box-shadow:
-        0 18px 32px rgba(5,9,30,.45),
-        inset 5px 5px 10px rgba(255,255,255,.9),
-        inset -5px -5px 10px rgba(45,55,140,.5);
-      display:flex;align-items:center;justify-content:center;
-      animation:clay-float-3 6.2s ease-in-out infinite .8s;
-    }
-    .clay-donut::after{
-      content:"";width:22px;height:22px;border-radius:50%;
-      background:radial-gradient(circle at 65% 65%,#38429B 0%,#202766 80%,#151B4D 100%);
-      box-shadow:inset 3px 3px 6px rgba(5,9,30,.8),0 2px 4px rgba(255,255,255,.4);
-    }
-
-    /* 5. Clay Pill Blurple */
+    /* 4. Clay Pill Blurple */
     .clay-pill{
       right:clamp(3%,6vw,8%);top:20%;width:66px;height:32px;border-radius:999px;
       background:linear-gradient(135deg,#7983F5 0%,#5865F2 60%,#3C45A5 100%);
@@ -324,7 +302,7 @@
       box-shadow:inset 1px 1px 2px rgba(0,0,0,.2),0 1px 2px rgba(0,0,0,.15);
     }
 
-    /* 6. Clay Orb Coral / Pink */
+    /* 5. Clay Orb Coral / Pink */
     .clay-orb-coral{
       right:clamp(14%,18vw,22%);top:15%;width:36px;height:36px;border-radius:50%;
       background:radial-gradient(circle at 30% 28%,#FFE5F5 0%,#FF73FA 50%,#B82894 100%);
@@ -335,7 +313,7 @@
       animation:clay-float-3 4.8s ease-in-out infinite .1s;
     }
 
-    /* 7. Clay Orb Ice Cyan */
+    /* 6. Clay Orb Ice Cyan */
     .clay-orb-cyan{
       right:clamp(3%,6vw,9%);top:47%;width:48px;height:48px;border-radius:50%;
       background:radial-gradient(circle at 30% 28%,#FFFFFF 0%,#B8E4FF 40%,#58A6FF 80%,#1A5CB8 100%);
@@ -346,7 +324,7 @@
       animation:clay-float-2 5.4s ease-in-out infinite .6s;
     }
 
-    /* 8. Clay Plus White/Cyan */
+    /* 7. Clay Plus White/Cyan */
     .clay-plus--white{
       right:clamp(13%,16vw,19%);top:38%;width:22px;height:22px;
       transform:rotate(15deg);
@@ -358,9 +336,6 @@
     }
     .clay-plus--white .clay-plus-bar--v{width:7px;height:22px;left:7.5px;top:0}
     .clay-plus--white .clay-plus-bar--h{width:22px;height:7px;left:0;top:7.5px}
-
-    /* 9. Clay Star Cyan */
-    .clay-star--cyan{right:clamp(3%,6vw,9%);top:74%;width:46px;height:46px;animation:clay-spin-float 8s ease-in-out infinite reverse}
 
     @keyframes clay-float-1{
       0%,100%{transform:translateY(0) rotate(14deg)}
@@ -380,12 +355,11 @@
     }
 
     @media (max-width:980px){
-      .clay-plus--gold,.clay-plus--white,.clay-orb-coral,.clay-donut{display:none}
-      .clay-star--gold{left:3%;width:38px;height:38px}
-      .clay-orb-gold{left:4%;width:44px;height:44px}
+      .clay-plus--gold,.clay-plus--white,.clay-orb-coral{display:none}
+      .clay-star--gold{left:3%;width:30px;height:30px}
+      .clay-star--main{left:4%;width:44px;height:44px}
       .clay-pill{right:3%;width:56px;height:28px}
       .clay-orb-cyan{right:4%;width:40px;height:40px}
-      .clay-star--cyan{right:3%;width:38px;height:38px}
     }
     @media (max-width:640px){
       .hero-doodles{display:none}
@@ -768,18 +742,18 @@
       <div class="hero-media" aria-hidden="true"></div>
       <div class="hero-halftone" aria-hidden="true"></div>
       <div class="hero-doodles" aria-hidden="true">
-        <!-- 1. Clay Star Gold -->
+        <!-- 1. Clay Star Gold Small -->
         <div class="clay-obj clay-star--gold">
           <svg class="clay-star" viewBox="0 0 64 64" fill="none">
             <defs>
-              <radialGradient id="starGradGold" cx="35%" cy="30%" r="65%">
+              <radialGradient id="starGradGoldSm" cx="35%" cy="30%" r="65%">
                 <stop offset="0%" stop-color="#FFFBD9"/>
                 <stop offset="35%" stop-color="#FEE75C"/>
                 <stop offset="75%" stop-color="#EAA600"/>
                 <stop offset="100%" stop-color="#B87300"/>
               </radialGradient>
             </defs>
-            <path d="M32 4 C33.5 19 45 30.5 60 32 C45 33.5 33.5 45 32 60 C30.5 45 19 33.5 4 32 C19 30.5 30.5 19 32 4 Z" fill="url(#starGradGold)"/>
+            <path d="M32 4 C33.5 19 45 30.5 60 32 C45 33.5 33.5 45 32 60 C30.5 45 19 33.5 4 32 C19 30.5 30.5 19 32 4 Z" fill="url(#starGradGoldSm)"/>
             <path d="M32 10 C33 21 41 29 52 30 C41 31 33 39 32 50 C31 39 23 31 12 30 C23 29 31 21 32 10 Z" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" stroke-linecap="round"/>
             <ellipse cx="28" cy="26" rx="4" ry="2.5" transform="rotate(-30 28 26)" fill="rgba(255,255,255,0.85)"/>
           </svg>
@@ -791,46 +765,40 @@
           <div class="clay-plus-bar clay-plus-bar--h"></div>
         </div>
 
-        <!-- 3. Clay Orb Gold -->
-        <div class="clay-obj clay-orb-gold"></div>
+        <!-- 3. Clay Star Main (menggantikan bulat kuning dengan style claymorphism) -->
+        <div class="clay-obj clay-star--main">
+          <svg class="clay-star" viewBox="0 0 64 64" fill="none">
+            <defs>
+              <radialGradient id="starGradMain" cx="35%" cy="30%" r="65%">
+                <stop offset="0%" stop-color="#FFFBD9"/>
+                <stop offset="35%" stop-color="#FEE75C"/>
+                <stop offset="75%" stop-color="#EAA600"/>
+                <stop offset="100%" stop-color="#B87300"/>
+              </radialGradient>
+            </defs>
+            <path d="M32 4 C33.5 19 45 30.5 60 32 C45 33.5 33.5 45 32 60 C30.5 45 19 33.5 4 32 C19 30.5 30.5 19 32 4 Z" fill="url(#starGradMain)"/>
+            <path d="M32 10 C33 21 41 29 52 30 C41 31 33 39 32 50 C31 39 23 31 12 30 C23 29 31 21 32 10 Z" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="2.5" stroke-linecap="round"/>
+            <ellipse cx="27" cy="25" rx="5" ry="3" transform="rotate(-30 27 25)" fill="rgba(255,255,255,0.9)"/>
+          </svg>
+        </div>
 
-        <!-- 4. Clay Donut Lavender -->
-        <div class="clay-obj clay-donut"></div>
-
-        <!-- 5. Clay Pill Blurple -->
+        <!-- 4. Clay Pill Blurple -->
         <div class="clay-obj clay-pill">
           <div class="clay-pill-dot"></div>
           <div class="clay-pill-dot"></div>
           <div class="clay-pill-dot"></div>
         </div>
 
-        <!-- 6. Clay Orb Coral -->
+        <!-- 5. Clay Orb Coral -->
         <div class="clay-obj clay-orb-coral"></div>
 
-        <!-- 7. Clay Orb Cyan -->
+        <!-- 6. Clay Orb Cyan -->
         <div class="clay-obj clay-orb-cyan"></div>
 
-        <!-- 8. Clay Plus White -->
+        <!-- 7. Clay Plus White -->
         <div class="clay-obj clay-plus clay-plus--white">
           <div class="clay-plus-bar clay-plus-bar--v"></div>
           <div class="clay-plus-bar clay-plus-bar--h"></div>
-        </div>
-
-        <!-- 9. Clay Star Cyan -->
-        <div class="clay-obj clay-star--cyan">
-          <svg class="clay-star" viewBox="0 0 64 64" fill="none">
-            <defs>
-              <radialGradient id="starGradCyan" cx="35%" cy="30%" r="65%">
-                <stop offset="0%" stop-color="#FFFFFF"/>
-                <stop offset="35%" stop-color="#D7E4FF"/>
-                <stop offset="75%" stop-color="#8BA5FF"/>
-                <stop offset="100%" stop-color="#4B66D6"/>
-              </radialGradient>
-            </defs>
-            <path d="M32 4 C33.5 19 45 30.5 60 32 C45 33.5 33.5 45 32 60 C30.5 45 19 33.5 4 32 C19 30.5 30.5 19 32 4 Z" fill="url(#starGradCyan)"/>
-            <path d="M32 10 C33 21 41 29 52 30 C41 31 33 39 32 50 C31 39 23 31 12 30 C23 29 31 21 32 10 Z" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="2.5" stroke-linecap="round"/>
-            <ellipse cx="28" cy="26" rx="4" ry="2.5" transform="rotate(-30 28 26)" fill="rgba(255,255,255,0.9)"/>
-          </svg>
         </div>
       </div>
       <div class="wrap">
