@@ -356,13 +356,18 @@
 
     @media (max-width:980px){
       .clay-plus--gold,.clay-plus--white,.clay-orb-coral{display:none}
-      .clay-star--gold{left:3%;width:30px;height:30px}
-      .clay-star--main{left:4%;width:44px;height:44px}
-      .clay-pill{right:3%;width:56px;height:28px}
-      .clay-orb-cyan{right:4%;width:40px;height:40px}
+      .clay-star--gold{left:2.5%;top:15%;width:28px;height:28px}
+      .clay-star--main{left:3%;top:48%;width:42px;height:42px}
+      .clay-pill{right:2.5%;top:16%;width:52px;height:26px}
+      .clay-orb-cyan{right:3%;top:48%;width:38px;height:38px}
     }
     @media (max-width:640px){
-      .hero-doodles{display:none}
+      .clay-plus--gold,.clay-plus--white,.clay-orb-coral{display:none}
+      .clay-star--gold{left:8px;top:12%;width:20px;height:20px}
+      .clay-star--main{left:8px;top:72%;width:24px;height:24px}
+      .clay-pill{right:8px;top:13%;width:38px;height:18px}
+      .clay-pill-dot{width:3.5px;height:3.5px}
+      .clay-orb-cyan{right:8px;top:70%;width:22px;height:22px}
     }
     @media (prefers-reduced-motion:reduce){
       .clay-obj,.clay-star{animation:none !important}
@@ -404,6 +409,33 @@
     .draw--js .draw-line.is-active p{display:block;font-size:13px;line-height:1.55;color:var(--text-2);max-width:56ch;margin:.75rem auto 0;text-wrap:pretty}
     .draw--js .draw-caption{display:none}
     .draw--js .draw-hint{display:block;flex:0 0 auto;text-align:center;font-family:var(--mono);font-size:13px;color:var(--text-2);padding-bottom:.5rem}
+    @media (max-width:860px){
+      .draw-stage{display:grid;gap:1.15rem;margin-top:1.5rem}
+      .draw-line{
+        background:var(--card);
+        border:1px solid var(--line);
+        border-radius:20px;
+        padding:1.4rem 1.25rem;
+        text-align:left;
+        box-shadow:var(--shadow);
+      }
+      .draw-line h3{
+        font-size:clamp(1.25rem,4.5vw,1.45rem);
+        color:var(--accent);
+        text-align:left;
+        margin-bottom:.35rem;
+        white-space:normal;
+      }
+      .draw-line p{
+        display:block !important;
+        font-size:14.5px;
+        color:var(--text-2);
+        line-height:1.55;
+        text-align:left;
+        margin:0;
+      }
+      .draw-hint{display:none !important}
+    }
     @media (max-width:620px){
       .draw--js .draw-line h3{font-size:clamp(2.1rem,11.5vw,3rem)}
       .draw--js .draw-caption{position:static;max-width:52ch;margin-top:1rem}
@@ -432,14 +464,15 @@
       color:var(--label);margin-top:1.5rem;padding-top:.85rem;border-top:1px solid var(--line);white-space:nowrap;
     }
     @media (max-width:860px){
+      .journey{padding:1.5rem 1rem}
       .journey-line--h{display:none}
-      .journey-line--v{display:block;position:absolute;left:30px;top:0;bottom:0;width:60px;height:100%}
-      .journey-steps{grid-template-columns:1fr;margin-top:0;gap:2.25rem}
-      .journey-step{display:grid;grid-template-columns:72px 1fr;column-gap:1rem;text-align:left;align-items:start}
-      .journey-num{grid-row:1 / span 3;grid-column:1;width:64px;height:64px;margin:0;font-size:1.75rem}
-      .journey-step h3{grid-column:2;margin-bottom:.4rem}
-      .journey-step p{grid-column:2;max-width:none;margin:0;font-size:15px}
-      .journey-meta{grid-column:2;margin-top:.85rem}
+      .journey-line--v{display:block;position:absolute;left:24px;top:0;bottom:0;width:48px;height:100%}
+      .journey-steps{grid-template-columns:1fr;margin-top:0;gap:2rem}
+      .journey-step{display:grid;grid-template-columns:56px 1fr;column-gap:.85rem;text-align:left;align-items:start;padding:0}
+      .journey-num{grid-row:1 / span 3;grid-column:1;width:56px;height:56px;margin:0;font-size:1.5rem}
+      .journey-step h3{grid-column:2;margin-bottom:.35rem;font-size:1.2rem}
+      .journey-step p{grid-column:2;max-width:none;margin:0;font-size:14.5px}
+      .journey-meta{grid-column:2;margin-top:.75rem;padding-top:.5rem;white-space:normal;font-size:12px;line-height:1.4}
     }
 
     /* ---------- harga: panel fitur ala tasteskill "Pictures" ---------- */
@@ -483,7 +516,7 @@
     .plan-feats-toggle{margin-bottom:1.5rem}
     .plan-feats-toggle summary{
       list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem;
-      padding:.8rem .75rem;font-size:15px;font-weight:500;white-space:nowrap;
+      padding:.8rem .75rem;font-size:15px;font-weight:500;text-align:center;
       color:var(--ink);background:var(--sunk);border-radius:11px;
       transition:background .2s var(--ease);
     }
@@ -507,6 +540,8 @@
     @media (max-width:860px){
       .plan-row{grid-template-columns:1fr}
       .plan-row--flip .plan-panel{order:0}
+      .plan-panel{padding:1.15rem .85rem}
+      .plan-body{padding:1.35rem 1rem}
     }
 
     /* ---------- layanan: grid bervariasi ---------- */
@@ -665,9 +700,22 @@
       .faq-search{margin-bottom:1.25rem}
     }
     @media (max-width:620px){
-      .hero-actions{flex-direction:column;align-items:stretch}
-      .hero-actions .btn{width:100%}
-      .hero-halftone{opacity:.5}
+      .hero{
+        min-height:92svh;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        padding-top:clamp(5rem,12vh,6rem);
+        padding-bottom:clamp(2.5rem,6vh,3.5rem);
+      }
+      .hero .wrap{width:100%;padding:0 24px}
+      .hero-content{max-width:100%}
+      .hero-content .display{font-size:clamp(1.85rem,7.8vw,2.35rem);line-height:1.15;letter-spacing:-.03em}
+      .hero-content .lede{font-size:14.5px;line-height:1.5;margin-top:.75rem}
+      .hero-actions{flex-direction:column;align-items:stretch;gap:.65rem;margin-top:1.5rem}
+      .hero-actions .btn{width:100%;min-height:46px;font-size:15px;justify-content:center}
+      .hero-note{font-size:12.5px;line-height:1.5;margin-top:1.25rem;color:rgba(10,18,48,.85)}
+      .hero-halftone{opacity:.35}
       .cta-inner{
         background:#5865F2;
         padding:2.25rem 1.25rem calc(178px + 1.5rem);
@@ -1414,7 +1462,7 @@
       /* mode "halus": device minta reduced motion — tetap ada pergantian modul saat
          digulir, tapi tanpa gerak 3D/parallax (hanya fade). */
       var drawSoft = reduce;
-      var drawActive = function () { return !drawSoft || window.innerWidth <= 900; };
+      var drawActive = function () { return !drawSoft && window.innerWidth > 860; };
       if (draw && 'requestAnimationFrame' in window) {
         var drawSection = document.getElementById('produk');
         var drawLines = Array.prototype.slice.call(draw.querySelectorAll('.draw-line'));
