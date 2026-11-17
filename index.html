@@ -222,10 +222,35 @@
     .hero h1{margin-bottom:1.5rem;color:var(--hero-text);font-size:clamp(38px,5.4vw,72px)}
     .hero .lede{margin:0 auto 2rem;color:rgba(242,245,255,.85)}
     .hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;margin-bottom:1.5rem}
-    .hero .btn--blue{background:var(--accent);color:#fff}
-    .hero .btn--blue:hover{background:#4752C4}
-    .hero .btn--line{background:rgba(10,18,48,.45);color:#fff;border-color:rgba(255,255,255,.65)}
-    .hero .btn--line:hover{background:rgba(10,18,48,.60);color:#fff;border-color:#fff}
+    .hero .btn--blue{
+      background:rgba(88,101,242,.42);color:#fff;
+      border:1px solid rgba(255,255,255,.55);
+      -webkit-backdrop-filter:blur(16px) saturate(150%);
+      backdrop-filter:blur(16px) saturate(150%);
+      box-shadow:0 10px 28px -10px rgba(7,13,36,.55), inset 0 1px 0 rgba(255,255,255,.45);
+      text-shadow:0 1px 2px rgba(0,0,0,.3);
+    }
+    .hero .btn--blue:hover{
+      background:rgba(88,101,242,.62);
+      border-color:rgba(255,255,255,.75);
+      box-shadow:0 14px 32px -10px rgba(7,13,36,.65), inset 0 1px 0 rgba(255,255,255,.55);
+      transform:translateY(-2px);
+    }
+    .hero .btn--line{
+      background:rgba(255,255,255,.12);color:#fff;
+      border:1px solid rgba(255,255,255,.40);
+      -webkit-backdrop-filter:blur(16px) saturate(140%);
+      backdrop-filter:blur(16px) saturate(140%);
+      box-shadow:0 10px 28px -10px rgba(7,13,36,.40), inset 0 1px 0 rgba(255,255,255,.30);
+      text-shadow:0 1px 2px rgba(0,0,0,.3);
+    }
+    .hero .btn--line:hover{
+      background:rgba(255,255,255,.22);
+      border-color:rgba(255,255,255,.65);
+      color:#fff;
+      box-shadow:0 14px 32px -10px rgba(7,13,36,.50), inset 0 1px 0 rgba(255,255,255,.45);
+      transform:translateY(-2px);
+    }
     .hero-note{font-size:15px;font-weight:500;color:rgba(10,18,48,.8)}
 
     /* ---------- kartu generik ---------- */
@@ -240,10 +265,6 @@
     #produk{overflow:clip}
     .draw{position:relative}
     .draw-pin{position:relative}
-    .draw-top{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:1.25rem}
-    .draw-title{font-family:var(--display);font-weight:600;font-size:clamp(1.15rem,2.4vw,1.5rem);letter-spacing:-.02em;line-height:1.2}
-    .draw-counter{font-family:var(--mono);font-size:15px;font-weight:500;color:var(--label);white-space:nowrap;font-variant-numeric:tabular-nums}
-    .draw-current{color:var(--accent)}
     .draw-stage{position:relative;display:grid;gap:2.25rem}
     .draw-line{text-align:center}
     .draw-line h3{font-size:clamp(2rem,5vw,3.25rem);letter-spacing:-.03em;line-height:1.05}
@@ -253,7 +274,6 @@
     /* Mode pin aktif (hanya saat JS berjalan & motion diizinkan): */
     .draw--js .draw{height:600vh}
     .draw--js .draw-pin{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding:72px 0 16px}
-    .draw--js .draw-top{flex:0 0 auto}
     .draw--js .draw-stage{flex:1;display:block;perspective:1400px;perspective-origin:50% 30%}
     .draw--js .draw-line{
       position:absolute;left:0;top:50%;width:100%;
@@ -642,10 +662,6 @@
 
         <div class="draw" id="drawProduk">
           <div class="draw-pin">
-            <div class="draw-top">
-              <p class="draw-title">Satu dashboard, semua kebutuhan</p>
-              <p class="draw-counter" aria-live="polite"><span class="draw-current">1</span><span class="draw-total"> / 6</span></p>
-            </div>
             <div class="draw-stage" role="list" aria-label="Enam modul dashboard sekolah">
               <article class="draw-line" role="listitem">
                 <h3 class="display">Web interaktif</h3>
@@ -1372,7 +1388,7 @@
 
         /* produk: nudge ringan saat masuk */
         onceIO('#produk', function (el) {
-          anim(el.querySelectorAll('.draw-top, .draw-hint'), {
+          anim(el.querySelectorAll('.draw-hint'), {
             translateY: [8, 0],
             duration: 450,
             delay: stagger ? stagger(60) : 60,
