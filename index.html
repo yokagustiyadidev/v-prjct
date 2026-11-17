@@ -409,36 +409,10 @@
     .draw--js .draw-line.is-active p{display:block;font-size:13px;line-height:1.55;color:var(--text-2);max-width:56ch;margin:.75rem auto 0;text-wrap:pretty}
     .draw--js .draw-caption{display:none}
     .draw--js .draw-hint{display:block;flex:0 0 auto;text-align:center;font-family:var(--mono);font-size:13px;color:var(--text-2);padding-bottom:.5rem}
-    @media (max-width:860px){
-      .draw-stage{display:grid;gap:1.15rem;margin-top:1.5rem}
-      .draw-line{
-        background:var(--card);
-        border:1px solid var(--line);
-        border-radius:20px;
-        padding:1.4rem 1.25rem;
-        text-align:left;
-        box-shadow:var(--shadow);
-      }
-      .draw-line h3{
-        font-size:clamp(1.25rem,4.5vw,1.45rem);
-        color:var(--accent);
-        text-align:left;
-        margin-bottom:.35rem;
-        white-space:normal;
-      }
-      .draw-line p{
-        display:block !important;
-        font-size:14.5px;
-        color:var(--text-2);
-        line-height:1.55;
-        text-align:left;
-        margin:0;
-      }
-      .draw-hint{display:none !important}
-    }
     @media (max-width:620px){
-      .draw--js .draw-line h3{font-size:clamp(2.1rem,11.5vw,3rem)}
+      .draw--js .draw-line h3{font-size:clamp(1.85rem,9vw,2.75rem)}
       .draw--js .draw-caption{position:static;max-width:52ch;margin-top:1rem}
+      .draw--js .draw-hint{font-size:12px;padding:0 56px .5rem 16px}
     }
 
     /* ---------- proses: garis perjalanan bergelombang + nomor langkah ---------- */
@@ -1462,7 +1436,7 @@
       /* mode "halus": device minta reduced motion — tetap ada pergantian modul saat
          digulir, tapi tanpa gerak 3D/parallax (hanya fade). */
       var drawSoft = reduce;
-      var drawActive = function () { return !drawSoft && window.innerWidth > 860; };
+      var drawActive = function () { return !drawSoft || window.innerWidth <= 900; };
       if (draw && 'requestAnimationFrame' in window) {
         var drawSection = document.getElementById('produk');
         var drawLines = Array.prototype.slice.call(draw.querySelectorAll('.draw-line'));
