@@ -3,7 +3,30 @@
 
 # metadata sementara proses generate gambar
 assets/media-generation-*.json
+public/assets/media-generation-*.json
 
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# next.js
+/.next/
+/out/
+/build
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env
+.env*
+!.env.example
+
+# vercel
 .vercel
+
+# system
 .DS_Store
 Thumbs.db
